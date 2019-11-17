@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.crecode.blog.dao.BlogTagMapper" >
+  <resultMap id="BaseResultMap" type="cn.crecode.blog.pojo.BlogTag" >
+    <id column="int_tag_id" property="intTagId" jdbcType="INTEGER" />
+    <result column="str_tag_name" property="strTagName" jdbcType="VARCHAR" />
+    <result column="int_blog_id" property="intBlogId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    int_tag_id, str_tag_name, int_blog_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_cre_blog_tags
+    where int_tag_id = #{intTagId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_cre_blog_tags
+    where int_tag_id = #{intTagId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.crecode.blog.pojo.BlogTag" >
+    insert into t_cre_blog_tags (int_tag_id, str_tag_name, int_blog_id
+      )
+    values (#{intTagId,jdbcType=INTEGER}, #{strTagName,jdbcType=VARCHAR}, #{intBlogId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.crecode.blog.pojo.BlogTag" >
+    insert into t_cre_blog_tags
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="intTagId != null" >
+        int_tag_id,
+      </if>
+      <if test="strTagName != null" >
+        str_tag_name,
+      </if>
+      <if test="intBlogId != null" >
+        int_blog_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="intTagId != null" >
+        #{intTagId,jdbcType=INTEGER},
+      </if>
+      <if test="strTagName != null" >
+        #{strTagName,jdbcType=VARCHAR},
+      </if>
+      <if test="intBlogId != null" >
+        #{intBlogId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.crecode.blog.pojo.BlogTag" >
+    update t_cre_blog_tags
+    <set >
+      <if test="strTagName != null" >
+        str_tag_name = #{strTagName,jdbcType=VARCHAR},
+      </if>
+      <if test="intBlogId != null" >
+        int_blog_id = #{intBlogId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where int_tag_id = #{intTagId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.crecode.blog.pojo.BlogTag" >
+    update t_cre_blog_tags
+    set str_tag_name = #{strTagName,jdbcType=VARCHAR},
+      int_blog_id = #{intBlogId,jdbcType=INTEGER}
+    where int_tag_id = #{intTagId,jdbcType=INTEGER}
+  </update>
+</mapper>

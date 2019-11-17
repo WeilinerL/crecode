@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.crecode.blog.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.crecode.blog.pojo.User" >
+    <id column="int_user_id" property="intUserId" jdbcType="INTEGER" />
+    <result column="str_username" property="strUsername" jdbcType="VARCHAR" />
+    <result column="str_password" property="strPassword" jdbcType="VARCHAR" />
+    <result column="str_nickname" property="strNickname" jdbcType="VARCHAR" />
+    <result column="str_autograph" property="strAutograph" jdbcType="VARCHAR" />
+    <result column="str_head_portrait" property="strHeadPortrait" jdbcType="VARCHAR" />
+    <result column="str_user_type" property="strUserType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    int_user_id, str_username, str_password, str_nickname, str_autograph, str_head_portrait, 
+    str_user_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_cre_user
+    where int_user_id = #{intUserId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_cre_user
+    where int_user_id = #{intUserId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.crecode.blog.pojo.User" >
+    insert into t_cre_user (int_user_id, str_username, str_password, 
+      str_nickname, str_autograph, str_head_portrait, 
+      str_user_type)
+    values (#{intUserId,jdbcType=INTEGER}, #{strUsername,jdbcType=VARCHAR}, #{strPassword,jdbcType=VARCHAR}, 
+      #{strNickname,jdbcType=VARCHAR}, #{strAutograph,jdbcType=VARCHAR}, #{strHeadPortrait,jdbcType=VARCHAR}, 
+      #{strUserType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.crecode.blog.pojo.User" >
+    insert into t_cre_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="intUserId != null" >
+        int_user_id,
+      </if>
+      <if test="strUsername != null" >
+        str_username,
+      </if>
+      <if test="strPassword != null" >
+        str_password,
+      </if>
+      <if test="strNickname != null" >
+        str_nickname,
+      </if>
+      <if test="strAutograph != null" >
+        str_autograph,
+      </if>
+      <if test="strHeadPortrait != null" >
+        str_head_portrait,
+      </if>
+      <if test="strUserType != null" >
+        str_user_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="intUserId != null" >
+        #{intUserId,jdbcType=INTEGER},
+      </if>
+      <if test="strUsername != null" >
+        #{strUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="strPassword != null" >
+        #{strPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="strNickname != null" >
+        #{strNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="strAutograph != null" >
+        #{strAutograph,jdbcType=VARCHAR},
+      </if>
+      <if test="strHeadPortrait != null" >
+        #{strHeadPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="strUserType != null" >
+        #{strUserType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.crecode.blog.pojo.User" >
+    update t_cre_user
+    <set >
+      <if test="strUsername != null" >
+        str_username = #{strUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="strPassword != null" >
+        str_password = #{strPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="strNickname != null" >
+        str_nickname = #{strNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="strAutograph != null" >
+        str_autograph = #{strAutograph,jdbcType=VARCHAR},
+      </if>
+      <if test="strHeadPortrait != null" >
+        str_head_portrait = #{strHeadPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="strUserType != null" >
+        str_user_type = #{strUserType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where int_user_id = #{intUserId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.crecode.blog.pojo.User" >
+    update t_cre_user
+    set str_username = #{strUsername,jdbcType=VARCHAR},
+      str_password = #{strPassword,jdbcType=VARCHAR},
+      str_nickname = #{strNickname,jdbcType=VARCHAR},
+      str_autograph = #{strAutograph,jdbcType=VARCHAR},
+      str_head_portrait = #{strHeadPortrait,jdbcType=VARCHAR},
+      str_user_type = #{strUserType,jdbcType=VARCHAR}
+    where int_user_id = #{intUserId,jdbcType=INTEGER}
+  </update>
+</mapper>
